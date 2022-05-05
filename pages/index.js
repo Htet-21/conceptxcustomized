@@ -181,7 +181,7 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
         <meta name="twitter:card" content="summary" key="twcard" />
 
         {/* Open Graph */}
-        <meta property="og:url" content="https://classicluxury.dinger.asia" key="ogurl" />
+        <meta property="og:url" content="http://classicluxurystore.dinger.asia/" key="ogurl" />
         <meta property="og:image" content='/images/classicluxury.jpeg' key="ogimage" />
         <meta property="og:site_name" content="Classic Luxury Store (Payment Form)" key="ogsitename" />
         <meta property="og:title" content="Classic Luxury Store (Payment Form) | Dinger" key="ogtitle" />
