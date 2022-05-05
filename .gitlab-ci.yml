@@ -4,7 +4,7 @@ services:
 variables:
   REPOSITORY_URL: 573534412638.dkr.ecr.ap-southeast-1.amazonaws.com
   AWS_DEFAULT_REGION: ap-southeast-1
-  APP_NAME: dinger-fe-burmeseauto
+  APP_NAME: dinger-fe-classicluxurystore
 
 stages:
 - dockerbuild
