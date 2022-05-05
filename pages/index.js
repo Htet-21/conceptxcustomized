@@ -43,11 +43,11 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
     initialValues: {
       providerName: "",
       methodName: "",
-      totalAmount: 18000,
+      totalAmount: '',
       orderId: "",
       customerPhone: "",
       customerName: "",
-      items: `[{\"name\":\"Classic Luxury Store Payment Form\",\"amount\": \"18000\",\"quantity\":\"1\"}]`,
+      items: "",
       email: "",
       billToForeName: "",
       billToSurName: "",
@@ -128,9 +128,8 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
         }),
       }),
       description: Yup.string(),
-      customerAddress: Yup.string().required(Languages[language].enter_address1),
       orderIdNumber: Yup.string().required(Languages[language].enter_orderIdNumber),
-      totalAmount: Yup.number().required(Languages[language].totalAmount_required)
+      totalAmount: Yup.number().required(Languages[language].totalAmount_required).min(100)
     }),
     onSubmit: (values) => {
       rsaFunction(values);
@@ -141,7 +140,7 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
 
   useEffect(() => {
     if(formik.values.orderIdNumber){
-      formik.setFieldValue("description", `Order ID : ${formik.values.orderIdNumber}`);
+      formik.setFieldValue("description", `Order ID (user input) : ${formik.values.orderIdNumber}`);
     }
   }, [formik.values.orderIdNumber]);
 
@@ -151,7 +150,7 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
     /* production publick key */
     const pubKey =
        "-----BEGIN PUBLIC KEY-----\n" +
-      "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCJQdvERD9tqtTbgFD1MMLycARiBz/4k67p8yFgpsr61g7c8esQh7F3Yy5HbvJcwQx18yJzs6jXfpiDBwEaYutz3e4AIu+m1WeNUpEpUqZVDu0IZspjliubHEfpBqAq2GEgQc4joToV1p1+NYf/UHn7BmER76rxYM4UjmgElRwvCQIDAQAB";
+      "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEp8EkcbHXbfpYXne46v1bE/Qg8XK/EZTifOcSPIHcQwiJ1auIiKzZRmaYsuDhtkeGwS780M4kugEg7UYejPusY7+8p6wubjgGqDc/kDiism3wf/+Cj1/DuLuCli2tK0x3E75L+y6oi+B2oyG9eWLzYpUOKq+JdUOqoES+fX9tuwIDAQAB";
     ("-----END PUBLIC KEY-----");
 
     /* dev public key */
@@ -183,7 +182,7 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
 
         {/* Open Graph */}
         <meta property="og:url" content="https://classicluxury.dinger.asia" key="ogurl" />
-        <meta property="og:image" content='/images/burmese_auto.jpg' key="ogimage" />
+        <meta property="og:image" content='/images/classicluxury.jpeg' key="ogimage" />
         <meta property="og:site_name" content="Classic Luxury Store (Payment Form)" key="ogsitename" />
         <meta property="og:title" content="Classic Luxury Store (Payment Form) | Dinger" key="ogtitle" />
       </Head>

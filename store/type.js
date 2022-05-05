@@ -5,8 +5,8 @@ export const payUrl = "https://api.dinger.asia/api/";
 
 export const baseUrl = 'https://api.dinger.asia/';
 
-export const projectName = 'Burmese Auto';
-export const apiKey = 'ko7bcvl.CBCkewfuNgCkTED6ivFYlG9vyg8';
+export const projectName = 'Classic Luxury Store';
+export const apiKey = '7m0cnet.xU3AFZE-v6hfWZJYDVgzMZoAkzw';
 export const merchantName = 'Burmese Auto';
 /* export const projectName = 'user27';
 export const apiKey = 'v1ub5e3.cfJkhmp0sVYElovXQPoA1Pd3Zp0';

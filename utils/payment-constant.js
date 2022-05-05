@@ -10,9 +10,9 @@ export const paymentType_options = [
     { value: 'CB Pay', label: 'CB Pay', subOpts:[
         { value: 'QR', label: 'Pay with QR' },
     ] },
-    { value: 'Sai Sai Pay', label: 'Sai Sai Pay', subOpts:[
+    /* { value: 'Sai Sai Pay', label: 'Sai Sai Pay', subOpts:[
         { value: 'PIN', label: 'Pay with PIN' }
-    ] },
+    ] }, */
     { value: 'WAVE PAY', label: 'WAVE PAY', subOpts:[
         { value: 'PIN', label: '(Wavemoney) -Pay with form' }
     ] },
@@ -38,6 +38,9 @@ export const paymentType_options = [
         { value: 'OTP', label: 'Pay with OTP' }
     ] },
     { value: 'JCB', label: 'JCB', subOpts:[
+        { value: 'OTP', label: 'Pay with OTP' }
+    ] },
+    { value: 'Master', label: 'Master', subOpts:[
         { value: 'OTP', label: 'Pay with OTP' }
     ] }
 ];

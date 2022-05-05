@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import Languages from "../languages/languages";
 import { paymentType_options } from "../../utils/payment-constant";
 import VisaFieldsBox from "./visaFields";
-import TermsModal from "../terms-modal/terms-modal";
 
 const PaymentForm = ({ formik, language }) => {
   const [paymentMethodOpt, setPaymentMethodOpt] = useState([]);
   const [providerName, setProviderName] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const [termsModal, setTermsModal] = useState(false);
-  const [totalSelected, setTotalSelected] = useState('');
-  const [qty, setQty] = useState([{'value':'1','label':'1'}]);
 
   const onPaymentType = (value) => {
     //reset payment method
@@ -28,10 +24,6 @@ const PaymentForm = ({ formik, language }) => {
     formik.setFieldValue("methodName", value.value);
   };
 
-  const onModalClose = () => {
-    setTermsModal(false);
-  };
-
   /* const onClickTerms = (e) => {
     e.preventDefault();
     setTermsModal(true);
@@ -45,20 +37,13 @@ const PaymentForm = ({ formik, language }) => {
     formik.setFieldValue("items", JSON.stringify(item));
   } */
 
-  const onChangeQty=(e)=>{
-    let item = JSON.parse(formik.values.items);
-    setQty(e);
-    let totalAmt = e.value * JSON.parse(item[0].amount);
-
-    item[0].quantity = JSON.stringify(e.value);
-    formik.setFieldValue("items", JSON.stringify(item));
-    formik.setFieldValue("totalAmount", totalAmt);
-  }
-
-  let quantityOpt=[];
-  for( var i=1; i<=100;i++){
-    quantityOpt.push({'value':i,'label':i})
-  }
+  useEffect(() => {
+    if(formik.values.totalAmount){
+      let item = `[{\"name\":\"Classic Luxury Store Payment Form\",\"amount\": \"${JSON.stringify(formik.values.totalAmount)}\",\"quantity\":\"1\"}]`;
+      formik.setFieldValue("items", item);
+    }
+  }, [formik.values.totalAmount])
+  
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-4 pt-3">
@@ -129,9 +114,10 @@ const PaymentForm = ({ formik, language }) => {
         <input
           id="totalAmount"
           name="totalAmount"
-          type="text"
+          type="number"
+          {...formik.getFieldProps("totalAmount")}
           className="form-control"
-          value={formik.values.totalAmount}
+          placeholder={Languages[language].enter_totalAmount}
         />
         {formik.touched.totalAmount && formik.errors.totalAmount ? (
           <div className="form-group-error">{formik.errors.totalAmount}</div>
@@ -186,9 +172,6 @@ const PaymentForm = ({ formik, language }) => {
             : Languages[language].pay_now}
         </button>
       </div>
-      {termsModal && (
-        <TermsModal language={language} onModalClose={() => onModalClose()} />
-      )}
     </form>
   );
 };
