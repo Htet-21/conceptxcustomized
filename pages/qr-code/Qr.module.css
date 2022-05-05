@@ -1,0 +1,10 @@
+.qr_div canvas {
+    height: 200px!important;
+    width: 200px!important;
+    display: block;
+    margin: 20px auto;
+}
+.qr_text {
+    color: #000;
+    text-align: center;
+}

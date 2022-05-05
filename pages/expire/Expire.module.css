@@ -1,0 +1,18 @@
+.error_text {
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px 0px;
+}
+.click_confrim button {
+    width: 200px;
+    height: 44px;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    color: #000;
+    background-color: #FFD300;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: 0px;
+}

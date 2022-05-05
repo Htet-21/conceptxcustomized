@@ -1,0 +1,101 @@
+.pay_success_text {
+    color: #26262E;
+    padding: 0px;
+    font-size: 24px;
+    line-height: 38px;
+    text-align: left;
+}
+.click_confrim button {
+    width: 200px;
+    height: 44px;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    color: #000;
+    background-color: #FFD300;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: 0px;
+}
+.code_color {
+    color: #DDA717;
+}
+.bot_text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 26px;
+}
+.pending_text {
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    font-size: 16px;
+    line-height: 26px;
+}
+.pay_success_text img {
+    width: 41px;
+    height: 41px;
+    margin-right: 20px;
+}
+.receipt_btn {
+    width: 100%;
+    border-radius: 5px;
+    border: 0px;
+    height: 44px;
+    margin: 10px auto;
+    display: block;
+    color: #000;
+    background: #F7F7F8;
+}
+.success_div {
+    width: 100%;
+    display: block;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    padding: 30px 0px;
+    border-bottom: 1px dashed #D6D8DC;
+}
+.left_div {
+    width: 20%;
+    height: auto;
+    display: block;
+    float: left;
+}
+.right_div {
+    width: 80%;
+    height: auto;
+    display: block;
+    float: left;
+}
+.success_btn_div {
+    width: 100%;
+    padding: 0px;
+    display: block;
+    overflow: hidden;
+}
+.qr_title {
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+.payment_detail{
+    width: 100%;
+    padding: 20px 0px;
+    border-bottom: 1px dashed #D6D8DC;
+    margin-bottom: 30px;
+}
+.left_text {
+    text-align: left;
+    color: #26262E;
+    opacity: 0.6;
+    font-size: 16px;
+}
+.right_text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: right;
+}
