@@ -13,6 +13,14 @@ const PaymentDetail = ({ language }) => {
       </h2>
       <div className="row">
         <div className="col-lg-6 col-md-6 col-sm-6">
+          <p className={styles.left_text}>{Languages[language].name}</p>
+        </div>
+        <div className="col-lg-6 col-md-6 col-sm-6">
+          <p className={styles.right_text}>{submittedVal?.customerName}</p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-6 col-md-6 col-sm-6">
           <p className={styles.left_text}>{Languages[language].phone}</p>
         </div>
         <div className="col-lg-6 col-md-6 col-sm-6">
@@ -21,7 +29,15 @@ const PaymentDetail = ({ language }) => {
       </div>
       <div className="row">
         <div className="col-lg-6 col-md-6 col-sm-6">
-          <p className={styles.left_text}>{Languages[language].amount}</p>
+          <p className={styles.left_text}>{Languages[language].orderIdnumber}</p>
+        </div>
+        <div className="col-lg-6 col-md-6 col-sm-6">
+          <p className={styles.right_text}>{submittedVal?.description}</p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-6 col-md-6 col-sm-6">
+          <p className={styles.left_text}>{Languages[language].totalAmount}</p>
         </div>
         <div className="col-lg-6 col-md-6 col-sm-6">
           <p className={styles.right_text}>

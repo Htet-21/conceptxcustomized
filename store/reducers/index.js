@@ -10,6 +10,7 @@ import { GetTokenReducer } from './getToken-reducer';
 import { ViuPayApiReducer } from './viuPayApi-reducer';
 import { GetCountTransReducer } from './getCountTrans-reducer';
 import { TransactionDetailReducer } from './transactionDetail-reducer';
+import { CalculateFeesReducer } from './calculateFees-reducer';
 
 export default combineReducers({
   authenticateResponse: AuthenticateReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   getToken: GetTokenReducer,
   viuPayApi: ViuPayApiReducer,
   countTransaction: GetCountTransReducer,
-  transactionDetailResponse: TransactionDetailReducer
+  transactionDetailResponse: TransactionDetailReducer,
+  calculateFees: CalculateFeesReducer
 });

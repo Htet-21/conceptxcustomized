@@ -7,6 +7,7 @@ import Header from "../../components/ui-layouts/header";
 import { CheckStatusAction } from "../../store/actions/checkStatus-action";
 import { GetTokenAction } from '../../store/actions/getToken-action';
 import { useRouter } from "next/router";
+import PaymentDetail from '../../components/payment-detail/paymentDetail';
 
 const PayWithPinRedirect = ({ dispatch, checkStatusResponse }) => {
     const cookie = new Cookies();
@@ -52,7 +53,7 @@ const PayWithPinRedirect = ({ dispatch, checkStatusResponse }) => {
                         <div className="border-box bg-white mt-md-5 mt-3">
                             <Header setLanguage={setLanguage} language={language}/>
                             <div className="mt-5">
-                                <h3 className="h5">{Languages[language].check_payment_data}</h3>
+                                {/* <h3 className="h5">{Languages[language].check_payment_data}</h3>
 
                                 <div className="w-100 d-flex pb-3 pt-4">
                                     <span className="opacity-3">{Languages[language].phone}</span>
@@ -62,7 +63,8 @@ const PayWithPinRedirect = ({ dispatch, checkStatusResponse }) => {
                                     <span className="opacity-3">{Languages[language].total_amount}</span>
                                     <span className="ml-auto">{submittedVal?.totalAmount} {Languages[language].mmk}</span>
                                 </div>
-
+ */}
+                                <PaymentDetail language={language} />
                                 <p>{Languages[language].guide_text1} {submittedVal?.providerName} {Languages[language].guide_text2}</p>
                             </div>
                         </div>

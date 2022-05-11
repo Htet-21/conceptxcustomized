@@ -93,7 +93,8 @@ const Languages = {
         enter_orderIdNumber: "Enter order ID",
         orderIdnumber: "Order ID",
         quantity: "Quantity",
-        enter_quantity: "Enter quantity"
+        enter_quantity: "Enter quantity",
+        transaction_fees: "Transaction Fees"
     },
     my: {
         back: "နောက်သို့",
@@ -189,7 +190,8 @@ const Languages = {
         enter_orderIdNumber: "Order ID ထည့်ရန်",
         orderIdnumber: "Order ID",
         quantity: "အရေအတွက်",
-        enter_quantity: "အရေအတွက်ရွေးချယ်ရန်"
+        enter_quantity: "အရေအတွက်ရွေးချယ်ရန်",
+        transaction_fees: "ငွေလွှဲခ"
     },
   };
   

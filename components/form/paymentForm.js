@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, connect } from "react-redux";
 import Select from "react-select";
 import Languages from "../languages/languages";
 import { paymentType_options } from "../../utils/payment-constant";
 import VisaFieldsBox from "./visaFields";
+import { calculateFeesAction } from '../../store/actions/calculateFees-action';
+import {CALCULATE_FEES_CANCEL} from '../../store/type';
 
-const PaymentForm = ({ formik, language }) => {
+const PaymentForm = ({ formik, language, calculateFees, totalWithTransFees, setTotalAmount, totalAmount, setLoading, loading, setTotalWithTransFees }) => {
+  const dispatch = useDispatch();
   const [paymentMethodOpt, setPaymentMethodOpt] = useState([]);
   const [providerName, setProviderName] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -22,6 +26,8 @@ const PaymentForm = ({ formik, language }) => {
   const onPaymentMethod = (value) => {
     setPaymentMethod(value);
     formik.setFieldValue("methodName", value.value);
+
+    feesCalculateFunc(totalAmount, formik.values.providerName, value.value);
   };
 
   /* const onClickTerms = (e) => {
@@ -38,12 +44,32 @@ const PaymentForm = ({ formik, language }) => {
   } */
 
   useEffect(() => {
-    if(formik.values.totalAmount){
-      let item = `[{\"name\":\"Classic Luxury Store Payment Form\",\"amount\": \"${JSON.stringify(formik.values.totalAmount)}\",\"quantity\":\"1\"}]`;
+    if(totalAmount){
+      setTotalWithTransFees(totalAmount);
+
+      let item = `[{\"name\":\"Classic Luxury Store Payment Form\",\"amount\": \"${totalAmount}\",\"quantity\":\"1\"}]`;
       formik.setFieldValue("items", item);
+
+      if(formik.values.providerName && formik.values.methodName){
+        feesCalculateFunc(totalAmount, formik.values.providerName, formik.values.methodName);
+      }
+    } else {
+      setTotalWithTransFees(0);
+      dispatch({type:CALCULATE_FEES_CANCEL});
+      formik.setFieldValue("totalAmount", 0);
     }
-  }, [formik.values.totalAmount])
+  }, [totalAmount])
   
+  const feesCalculateFunc=(netAmount,providerName,methodName)=>{
+    dispatch({type:CALCULATE_FEES_CANCEL});
+    setLoading(true);
+    let data = {
+      "netAmount": netAmount,
+      "providerName": providerName,
+      "methodName": methodName 
+    }
+    dispatch(calculateFeesAction(JSON.stringify(data)));
+  }
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-4 pt-3">
@@ -115,7 +141,9 @@ const PaymentForm = ({ formik, language }) => {
           id="totalAmount"
           name="totalAmount"
           type="number"
-          {...formik.getFieldProps("totalAmount")}
+          /* {...formik.getFieldProps("totalAmount")} */
+          onChange={(e)=>setTotalAmount(e.target.value)}
+          value={totalAmount>0?totalAmount:''}
           className="form-control"
           placeholder={Languages[language].enter_totalAmount}
         />
@@ -162,10 +190,30 @@ const PaymentForm = ({ formik, language }) => {
         ""
       )}
       <div className="d-inline-block w-100">
+        <table className="w-100 mb-5 mt-3">
+          <tbody>
+            <tr>
+              <td className="pb-3">{Languages[language].subtotal}</td>
+              <td className="text-right pb-3">{totalAmount?totalAmount:0} {Languages[language].mmk}</td>
+            </tr>
+            <tr>
+              <td className="pb-3">{Languages[language].transaction_fees}</td>
+              <td className="text-right pb-3">{calculateFees?.transactionFees?calculateFees.transactionFees:0} {Languages[language].mmk}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr className="border-top">
+              <td className="pt-3">{Languages[language].total}</td>
+              <td className="text-right pt-3">{totalWithTransFees?totalWithTransFees:formik.values.totalAmount} {Languages[language].mmk}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div className="d-inline-block w-100">
         <button
           type="submit"
           className="theme-btn float-right w-100"
-          disabled={formik.isSubmitting || !formik.isValid}
+          disabled={formik.isSubmitting || !formik.isValid || loading}
         >
           {formik.isSubmitting
             ? Languages[language].loading_btn

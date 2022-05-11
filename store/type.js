@@ -8,8 +8,8 @@ export const baseUrl = 'https://api.dinger.asia/';
 export const projectName = 'Classic Luxury Store';
 export const apiKey = '7m0cnet.xU3AFZE-v6hfWZJYDVgzMZoAkzw';
 export const merchantName = 'Burmese Auto';
-/* export const projectName = 'user27';
-export const apiKey = 'v1ub5e3.cfJkhmp0sVYElovXQPoA1Pd3Zp0';
+/* export const projectName = 'Shwe 1';
+export const apiKey = '3t6mo0t.-ZlJ1XI3orw3EzePXfKAO_L7Aek';
 export const merchantName = 'Shwe Yee Win Aung'; */
 
 export const RedirectUrl = "https://portal.dinger.asia/gateway/redirect";
@@ -91,3 +91,8 @@ export const GET_COUNT_TRANS_ACTION_ERROR = 'GET_COUNT_TRANS_ACTION_ERROR';
 export const TRANSACTION_DETAIL = 'TRANSACTION_DETAIL';
 export const TRANSACTION_DETAIL_SUCCESS = 'TRANSACTION_DETAIL_SUCCESS';
 export const TRANSACTION_DETAIL_ERROR = 'TRANSACTION_DETAIL_ERROR';
+
+export const CALCULATE_FEES = "CALCULATE_FEES";
+export const CALCULATE_FEES_SUCCESS = "CALCULATE_FEES_SUCCESS";
+export const CALCULATE_FEES_ERROR = "CALCULATE_FEES_ERROR";
+export const CALCULATE_FEES_CANCEL = "CALCULATE_FEES_CANCEL";

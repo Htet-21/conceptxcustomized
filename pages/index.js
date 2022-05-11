@@ -14,12 +14,15 @@ import { PayConfirmAcition } from "../store/actions/payConfirmAction";
 import Footer from "../components/ui-layouts/footer";
 import Head from 'next/head';
 
-const FormPaymentVIU = ({ token, payApiRes }) => {
+const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
   const dispatch = useDispatch();
   const cookie = new Cookies();
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const [submitVal, setSubmitVal] = useState(null);
   const [language, setLanguage] = useState("my");
+  const [totalWithTransFees, setTotalWithTransFees] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(GetTokenAction());
@@ -39,11 +42,21 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if(calculateFees.code == error.REQUEST_SUCCESS){
+      setLoading(false);
+      let total = JSON.parse(totalAmount) + calculateFees.response.transactionFees;
+      setTotalWithTransFees(total);
+      formik.setFieldValue("totalAmount", total);
+      formik.setFieldValue("additionalFees", calculateFees.response.transactionFees);
+    }
+  }, [calculateFees])
+
   const formik = useFormik({
     initialValues: {
       providerName: "",
       methodName: "",
-      totalAmount: '',
+      totalAmount: 0,
       orderId: "",
       customerPhone: "",
       customerName: "",
@@ -53,7 +66,8 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
       billToSurName: "",
       billAddress: "",
       billCity: "",
-      description:""
+      description:"",
+      additionalFees:0
     },
     validationSchema: Yup.object({
       providerName: Yup.string()
@@ -132,9 +146,11 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
       totalAmount: Yup.number().required(Languages[language].totalAmount_required).min(100)
     }),
     onSubmit: (values) => {
-      rsaFunction(values);
-      setSubmitVal(values);
-      cookie.set("submittedVal", JSON.stringify(values));
+      let result = {...values};
+      delete result.orderIdNumber;
+      rsaFunction(result);
+      setSubmitVal(result);
+      cookie.set("submittedVal", JSON.stringify(result));
     },
   });
 
@@ -154,9 +170,9 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
     ("-----END PUBLIC KEY-----");
 
     /* dev public key */
-    /* const pubKey =
+   /*  const pubKey =
        "-----BEGIN PUBLIC KEY-----\n" +
-      "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCAiLiFXNUu6fe4POPDuhxeEhGne1BR3Usp0/r5MpxHpARBjAJCG1j6B6FuAEdf1M63uI4rymKVQGK6P7IbOplJ+VbYqyXmG4vqHS6UA8NgmAWzhF7/b8LG45xFcW3qr73T80/iEPRCAyKsEn9LL0gwlObG01KUv/jf7B+ci3ZavQIDAQAB";
+      "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCfzDObYSSRoTbZsKifgk/3kKj2ItxC48vNkantCJonahgGf06Rjr21Mrz85X75bK7ND7GVmcanfa2Hu3G18ErMDh17qSR1cS+HDJaeXOqEQ7ZTU+sSntn2FHY+78OQfBiNAhDutDf0XPx+QpDadNXH4JRRBmKAu2ylb6CnrpM8swIDAQAB";
     ("-----END PUBLIC KEY-----"); */
 
     const publicKey = new NodeRSA();
@@ -195,7 +211,7 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
                 <h2 className="h4 pt-3" id={language}>
                   {Languages[language].formTitle}
                 </h2>
-                <PaymentForm formik={formik} language={language} />
+                <PaymentForm formik={formik} language={language} calculateFees={calculateFees?.response} totalWithTransFees={totalWithTransFees} setTotalAmount={setTotalAmount} totalAmount={totalAmount} setLoading={setLoading} loading={loading} setTotalWithTransFees={setTotalWithTransFees}/>
               </div>
             </div>
           </div>
@@ -208,5 +224,6 @@ const FormPaymentVIU = ({ token, payApiRes }) => {
 
 export default connect((state) => ({
   token: state.getToken,
-  payApiRes: state.viuPayApi
+  payApiRes: state.viuPayApi,
+  calculateFees: state.calculateFees
 }))(FormPaymentVIU);
