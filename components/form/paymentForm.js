@@ -184,6 +184,7 @@ const PaymentForm = ({ formik, language, calculateFees, totalWithTransFees, setT
         ) : null}
       </div>
       {formik.values.providerName == "Visa" ||
+      formik.values.providerName == "Master" ||
       formik.values.providerName == "JCB" ? (
         <VisaFieldsBox formik={formik} language={language} />
       ) : (

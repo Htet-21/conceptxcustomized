@@ -89,6 +89,10 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
             .when("providerName", {
               is: "JCB",
               then: Yup.string().required(Languages[language].email_required),
+            })
+            .when("providerName", {
+              is: "Master",
+              then: Yup.string().required(Languages[language].email_required),
             }),
         }),
       billToForeName: Yup.string()
@@ -100,6 +104,12 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
             .max(20, Languages[language].max_20_length)
             .when("providerName", {
               is: "JCB",
+              then: Yup.string().required(
+                Languages[language].firstName_required
+              ),
+            })
+            .when("providerName", {
+              is: "Master",
               then: Yup.string().required(
                 Languages[language].firstName_required
               ),
@@ -117,29 +127,47 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
               then: Yup.string().required(
                 Languages[language].lastName_required
               ),
+            }).when("providerName", {
+              is: "Master",
+              then: Yup.string().required(
+                Languages[language].lastName_required
+              ),
             }),
         }),
-      billAddress: Yup.string().when("providerName", {
-        is: "Visa",
-        then: Yup.string().required(
-          Languages[language].billing_address_required
-        ),
-        otherwise: Yup.string().when("providerName", {
-          is: "JCB",
+      billAddress: Yup.string()
+        .when("providerName", {
+          is: "Visa",
           then: Yup.string().required(
             Languages[language].billing_address_required
           ),
-        }),
+          otherwise: Yup.string()
+            .when("providerName", {
+              is: "JCB",
+              then: Yup.string().required(
+                Languages[language].billing_address_required
+              ),
+            }).when("providerName", {
+              is: "Master",
+              then: Yup.string().required(
+                Languages[language].billing_address_required
+              ),
+            }),
       }),
       billCity: Yup.string().when("providerName", {
         is: "Visa",
         then: Yup.string().required(Languages[language].billing_city_required),
-        otherwise: Yup.string().when("providerName", {
-          is: "JCB",
-          then: Yup.string().required(
-            Languages[language].billing_city_required
-          ),
-        }),
+        otherwise: Yup.string()
+          .when("providerName", {
+            is: "JCB",
+            then: Yup.string().required(
+              Languages[language].billing_city_required
+            ),
+          }).when("providerName", {
+            is: "Master",
+            then: Yup.string().required(
+              Languages[language].billing_city_required
+            ),
+          }),
       }),
       description: Yup.string(),
       orderIdNumber: Yup.string().required(Languages[language].enter_orderIdNumber),
@@ -153,7 +181,7 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
       cookie.set("submittedVal", JSON.stringify(result));
     },
   });
-
+  
   useEffect(() => {
     if(formik.values.orderIdNumber){
       formik.setFieldValue("description", `Order ID (user input) : ${formik.values.orderIdNumber}`);
