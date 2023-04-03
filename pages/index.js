@@ -170,12 +170,11 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
           }),
       }),
       description: Yup.string(),
-      orderIdNumber: Yup.string().required(Languages[language].enter_orderIdNumber),
+      customerName: Yup.string().required(Languages[language].enter_customerName),
       totalAmount: Yup.number().required(Languages[language].totalAmount_required).min(100)
     }),
     onSubmit: (values) => {
       let result = {...values};
-      delete result.orderIdNumber;
       rsaFunction(result);
       setSubmitVal(result);
       cookie.set("submittedVal", JSON.stringify(result));
@@ -183,10 +182,10 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
   });
   
   useEffect(() => {
-    if(formik.values.orderIdNumber){
-      formik.setFieldValue("description", `Order ID (user input) : ${formik.values.orderIdNumber}`);
+    if(formik.values.customerName){
+      formik.setFieldValue("description", `Student Name : ${formik.values.customerName}`);
     }
-  }, [formik.values.orderIdNumber]);
+  }, [formik.values.customerName]);
 
   const NodeRSA = require("node-rsa");
   const rsaFunction = (values) => {
@@ -194,7 +193,7 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
     /* production publick key */
     const pubKey =
        "-----BEGIN PUBLIC KEY-----\n" +
-      "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEp8EkcbHXbfpYXne46v1bE/Qg8XK/EZTifOcSPIHcQwiJ1auIiKzZRmaYsuDhtkeGwS780M4kugEg7UYejPusY7+8p6wubjgGqDc/kDiism3wf/+Cj1/DuLuCli2tK0x3E75L+y6oi+B2oyG9eWLzYpUOKq+JdUOqoES+fX9tuwIDAQAB";
+      "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCylSaeUXbXn5grxB6sczMG+iJ3o/J431Cqe7wWMX4Etahepy3p9xfn1rf9ky9Fu2I0VsrBMiGOewJ6zQwiYN6X44BeJI0c/SSUmgEXJfXjDCXLRMYPxl+OLZEPTaGB9hgWqOxmAN8eM4b+vkrK79PA1sET78thBRcGSsLoceWIfwIDAQAB";
     ("-----END PUBLIC KEY-----");
 
     /* dev public key */
@@ -215,8 +214,8 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
   return (
     <>
       <Head>
-        <title>Classic Luxury Store (Payment Form)</title>
-        <link rel="icon" href="/images/tab_icon.jpg" type="image/png" sizes="16x16"/>
+        <title>ConceptX (Payment Form)</title>
+        <link rel="icon" href="/images/classicluxury.jpeg" type="image/png" sizes="16x16"/>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
@@ -225,10 +224,10 @@ const FormPaymentVIU = ({ token, payApiRes, calculateFees }) => {
         <meta name="twitter:card" content="summary" key="twcard" />
 
         {/* Open Graph */}
-        <meta property="og:url" content="http://classicluxurystore.dinger.asia/" key="ogurl" />
+        <meta property="og:url" content="http://conceptx.dinger.asia/" key="ogurl" />
         <meta property="og:image" content='/images/classicluxury.jpeg' key="ogimage" />
-        <meta property="og:site_name" content="Classic Luxury Store (Payment Form)" key="ogsitename" />
-        <meta property="og:title" content="Classic Luxury Store (Payment Form) | Dinger" key="ogtitle" />
+        <meta property="og:site_name" content="ConceptX (Payment Form)" key="ogsitename" />
+        <meta property="og:title" content="ConceptX (Payment Form) | Dinger" key="ogtitle" />
       </Head>
       <div className="bg-gray">
         <div className="container" id={language}>

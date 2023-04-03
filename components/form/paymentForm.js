@@ -47,7 +47,7 @@ const PaymentForm = ({ formik, language, calculateFees, totalWithTransFees, setT
     if(totalAmount){
       setTotalWithTransFees(totalAmount);
 
-      let item = `[{\"name\":\"Classic Luxury Store Payment Form\",\"amount\": \"${totalAmount}\",\"quantity\":\"1\"}]`;
+      let item = `[{\"name\":\"ConceptX Payment Form\",\"amount\": \"${totalAmount}\",\"quantity\":\"1\"}]`;
       formik.setFieldValue("items", item);
 
       if(formik.values.providerName && formik.values.methodName){
@@ -119,7 +119,7 @@ const PaymentForm = ({ formik, language, calculateFees, totalWithTransFees, setT
           <div className="form-group-error">{formik.errors.customerAddress}</div>
         ) : null}
       </div> */}
-      <div className="form-group pb-3 relative" language={language}>
+      {/* <div className="form-group pb-3 relative" language={language}>
         <label htmlFor="orderIdNumber">
           {Languages[language].orderIdnumber}
         </label>
@@ -134,7 +134,7 @@ const PaymentForm = ({ formik, language, calculateFees, totalWithTransFees, setT
         {formik.touched.orderIdNumber && formik.errors.orderIdNumber ? (
           <div className="form-group-error">{formik.errors.orderIdNumber}</div>
         ) : null}
-      </div>
+      </div> */}
       <div className="form-group pb-3 relative">
         <label htmlFor="providerName">{Languages[language].totalAmount}</label>
         <input

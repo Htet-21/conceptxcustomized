@@ -5,12 +5,18 @@ export const payUrl = "https://api.dinger.asia/api/";
 
 export const baseUrl = 'https://api.dinger.asia/';
 
-export const projectName = 'Classic Luxury Store';
-export const apiKey = '7m0cnet.xU3AFZE-v6hfWZJYDVgzMZoAkzw';
-export const merchantName = 'Burmese Auto';
-/* export const projectName = 'Shwe 1';
-export const apiKey = '3t6mo0t.-ZlJ1XI3orw3EzePXfKAO_L7Aek';
-export const merchantName = 'Shwe Yee Win Aung'; */
+// export const formUrl = "https://test.dinger.asia/form-payment/api/";
+// export const payUrl = "https://staging.dinger.asia/payment-gateway-uat/";
+
+// export const baseUrl = 'https://staging.dinger.asia/payment-gateway-uat/';
+
+export const projectName = 'Conceptxcustomized';
+export const apiKey = 'i0u5591.na3n5W_QA1JWf71oCpxbiuVlV-g';
+export const merchantName = 'Soe Htet';
+
+// export const projectName = 'Gg';
+// export const apiKey = 'is6blk8.uh6fFqLkEzM1orj9oJzU6GudKtU';
+// export const merchantName = 'heinheinlay'; 
 
 export const RedirectUrl = "https://portal.dinger.asia/gateway/redirect";
 export const MPU_REDIRECT_URL = "https://portal.dinger.asia/gateway/mpu";
@@ -18,11 +24,11 @@ export const CREDIT_CARD_URL = "https://creditcard-portal.dinger.asia";
 export const REDIRECT_CB = "https://portal.dinger.asia/gateway/cbpay";
 export const REDIRECT_MPiteSan = "https://portal.dinger.asia/gateway/mpitesan";
 
-/* export const RedirectUrl = "https://staging.dinger.asia/gateway/redirect";
-export const MPU_REDIRECT_URL = "https://staging.dinger.asia/gateway/mpu";
-export const CREDIT_CARD_URL = "https://credit-card-portal-testing.dinger.asia";
-export const REDIRECT_CB = "https://staging.dinger.asia/gateway/cbpay";
-export const REDIRECT_MPiteSan = "https://staging.dinger.asia/gateway/mpitesan"; */
+// export const RedirectUrl = "https://staging.dinger.asia/gateway/redirect";
+// export const MPU_REDIRECT_URL = "https://staging.dinger.asia/gateway/mpu";
+// export const CREDIT_CARD_URL = "https://credit-card-portal-testing.dinger.asia";
+// export const REDIRECT_CB = "https://staging.dinger.asia/gateway/cbpay";
+// export const REDIRECT_MPiteSan = "https://staging.dinger.asia/gateway/mpitesan";
 
 export const error = {
   REQUEST_SUCCESS: "000",

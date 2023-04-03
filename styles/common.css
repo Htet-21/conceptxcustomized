@@ -41,8 +41,8 @@
 }
 
 .theme-btn{
-    border:1px solid #f6ba00;
-    background-color: #f6ba00;
+    border: 1px solid #595add;
+    background-color: #595add;
     color: #000;
     border-radius: 4px;
     padding: 9px 10px;
@@ -50,7 +50,7 @@
     transition:0.3s;
 }
 .theme-btn:not(:disabled):hover{
-    background-color:#fff;
+    background-color: linear-gradient(to right,#274685 0%,#3db3c5 100%);
     color:#f6ba00;
 }
 .theme-btn:disabled{
